@@ -170,7 +170,7 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 
 
 	<tr>
-		<td>Status of Product not working </td>
+		<td>Status of Product</td>
 		
 			<?php 
 		if($rec['status']==1)
@@ -180,16 +180,14 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 		<div class="material-switch pull-left">
                             <input id="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                             name="someSwitchOption001" 
-                            type="checkbox"/ 
+                            type="checkbox"
                             checked="checked" 
                             class="switch"
                             data-id="<?php echo $rec['id'];?>"
-                            data-status="<?php echo $rec['status'];?>"
-                       	  />
+                            data-status="<?php echo $rec['status'];?>" />
                             <label for="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                             class="label-success switchBtn" 
-                            data-id="<?php echo $rec['id'];?>" 
-                            data-status="<?php echo $rec['status'];?>"></label>
+                            ></label>
                         </div>	
              </td>
 		<?php
@@ -202,13 +200,12 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
                             name="someSwitchOption001" 
                             type="checkbox" 
                             class="switch" 
-
-                            />
+							data-id="<?php echo $rec['id'];?>" 
+                           data-status="<?php echo $rec['status'];?>"/>
                            <label 
                            for="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                            class="label-success switchBtn" 
-                           data-id="<?php echo $rec['id'];?>" 
-                           data-status="<?php echo $rec['status'];?>">
+                           
                           	</label>
                         
                         </div>

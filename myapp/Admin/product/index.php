@@ -172,8 +172,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
                        	  />
                             <label for="someSwitchOptionSuccess_insert" 
                             class="label-success switchBtn" 
-                            data-id=" "
-                            data-status=""></label>
+                            ></label>
                         </div>	
 	</td>
 	
@@ -188,8 +187,10 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 <tr>
 <td colspan=2 height="70">
 <center>
-<input type="submit" id="btn_add" name="add" value="Add" class="btn-success
-btn-lg" /> 
+<input type="submit" id="btn_add" name="add" value="Add" 
+ class="btn-success btn-lg"
+ data-id="<?php echo $last_id; ?>"
+ data-status="<?php echo $rec['status'];?>" /> 
 </center>
 </td>
 </tr>
@@ -268,11 +269,12 @@ Select All
                             type="checkbox"/ 
                             checked="checked" 
                             class="switch"
+                            data-id="<?php echo $rec['id'];?>" 
+                            data-status="<?php echo $rec['status'];?>"
                        	  />
                             <label for="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                             class="label-success switchBtn" 
-                            data-id="<?php echo $rec['id'];?>" 
-                            data-status="<?php echo $rec['status'];?>"></label>
+                            ></label>
                         </div>	
              </td>
 		<?php
@@ -284,14 +286,15 @@ Select All
                             <input id="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                             name="someSwitchOption001" 
                             type="checkbox" 
-                            class="switch" 
+                            class="switch"
+                            data-id="<?php echo $rec['id'];?>" 
+                           data-status="<?php echo $rec['status'];?>" 
 
                             />
                            <label 
                            for="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                            class="label-success switchBtn" 
-                           data-id="<?php echo $rec['id'];?>" 
-                           data-status="<?php echo $rec['status'];?>">
+                           >
                           	</label>
                         
                         </div>

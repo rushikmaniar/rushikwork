@@ -55,7 +55,7 @@
  			});
 
 		
-		$("body").on("click",".switchBtn",function(){
+		$(".switch").on("click",function(){
 			var productId = $(this).attr("data-id");
 			var status = $(this).attr("data-status");
 
@@ -92,11 +92,12 @@
 					
 					
 					$("#btn_add").on("click",function(){
-						console.log(insertstatus);
+						var id = $(this).attr("data-id");
+						//console.log(insertstatus);
 						$.ajax({
-								type : "POST",
-							  url: "index.php",
-							  data: {'status1': insertstatus},
+								type : "text",
+							  url: "update_switch.php",
+							  data:{"rowid":id,"status":insertstatus},
 							  cache: false,
 							  success:function(data){
 					            //success logic
