@@ -23,21 +23,22 @@
 
 			});	
 			
-			$("#selectall").on("click",function(){
-				//alert("called");	
+			
+			
+			$("#img_selectall").on("click",function() {
+
 				if(this.checked)
 				{
-				$('#table-display input:checkbox').each(function(){
+				$('.del_checkbox:checkbox').each(function(){
 					$(this).prop('checked',true);
 				});
 			}
 			else{
-				$('#table-display input:checkbox').each(function(){
+				$('.del_checkbox:checkbox').each(function(){
 					$(this).prop('checked',false);
 				});
 			}
 			});
-			
 
 			$("#string").on("input",function(){
 				//alert("called");
@@ -81,7 +82,7 @@
 
 //insert status
 			
-					/*var insertstatus;
+					var insertstatus;
 					$('#someSwitchOptionSuccess_insert').on('click', function(){
 					   this.value = this.checked ? 1 : 0;
 					   insertstatus = this.value;
@@ -93,9 +94,10 @@
 					$("#btn_add").on("click",function(){
 						console.log(insertstatus);
 						$.ajax({
-							  dataType : 'text',
-							  url: 'index.php',
+								type : "POST",
+							  url: "index.php",
 							  data: {'status1': insertstatus},
+							  cache: false,
 							  success:function(data){
 					            //success logic
 					            alert("success");	
@@ -108,5 +110,18 @@
 					});
 					});		
 					
-
-$()
+			//select all checkbox
+			$("#img_selectall").on("click",function() {
+				//alert("called");
+				if(this.checked)
+				{
+				$('.img_check:checkbox').each(function(){
+					$(this).prop('checked',true);
+				});
+			}
+			else{
+				$('.img_check:checkbox').each(function(){
+					$(this).prop('checked',false);
+				});
+			}
+			});

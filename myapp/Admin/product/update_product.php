@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>My App</title>
@@ -113,14 +113,51 @@ if(isset($_POST['update'])  && $_POST['update']=="Update"){
 					echo "Please, Select file(s) to upload.";
 				}
 		
-		//header("location:update_product.php");
+		header("location:update_product.php?id=$id");
 	//exit();
 }	
 
+if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
+		if(array_key_exists('img_del',$_POST)){
+			//print_r($_POST['hobby']);
+		print_r($_POST['img_del']);
+		//$arr = array ($_POST['hobby']);		
+		$arr= $_POST['img_del'];
+		foreach($arr as $key => $value)
+		{	
+
+			//Deleting images 
+			$sql = "select * from images where img_id=$value";
+			$q1 = mysqli_query($con,$sql);
+			$dir = "UploadFolder/images/";
+
+			while($res = mysqli_fetch_array($q1)){
+				$filename= $dir.$res['img_name'];
+				
+			    if (file_exists($filename)) {
+			        unlink($filename);
+			    } else {
+			        // File not found.
+			        echo "file not found";
+			    }
+				//echo $res['img_path'];
+				//$i++;
+			}	
+			//delete from image table
+			 $q_del = "delete from images where img_id=$value";
+			 $del = mysqli_query($con,$q_del) or die(mysqli_error($con));
+
+				header("location:update_product.php?id=$id");
+		}
+		}
+	}
+
 ?>
 <h1 class="h1">Update Product</h1>
-<form name="form1" method="post" enctype="multipart/form-data" >
+<form name="form_update" id="form_update" method="post" enctype="multipart/form-data" >
 <table class=" table table-condensed" border="5" cellpadding="5" cellspacing="5" style="background-color: white;">
+<th>Feilds</th>
+<th>values</th>
 	<tr>
 	<td>Product Name</td>
 	<td><input type="text" name="name" value="<?php echo $rec['name'] ?>"></td>
@@ -186,26 +223,33 @@ if(isset($_POST['update'])  && $_POST['update']=="Update"){
 <input type="file" name="files[]" multiple="multiple" />
 
 <label>Delete Product Images</label>
-
+<input type="submit" name="delete" value="Delete" onclick="my()">
 
 		</td>
-		<td>
-			
+		
 		<?php
 		//$imgid = $res['img_id'];
 					//$i = $res['img_id'];
 			$dir = "UploadFolder/images/";
+			echo "<td class = 'img_checkbox'>";
+			echo "<input type='checkbox' id='img_selectall'>";
+			echo "<label>Select ALL </label>";
+			?>
+			
+			<?php
 			while($res = mysqli_fetch_array($q1)){
 				?>
 				 <img src="<?php echo $dir.$res['img_name'] ?>" alt="not found">
-				&emsp;
+				<?php 
+					echo "<input type = 'checkbox' class='img_check' name='img_del[]' value='"
+					.$res['img_id']."'>";
+ 				?>
 				<?php
-				//echo $res['img_path'];
-				//$i++;
 			}	
+			echo "</td>";
 		?>				
 		
-			
+	
 		</td>
 	</tr>
 	<tr>
@@ -217,13 +261,15 @@ if(isset($_POST['update'])  && $_POST['update']=="Update"){
 </form>
 </body>
 </html>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="../../js/my.js"></script>
+<script src="js/my.js"></script>
 <script>
 	function my(){
-		window.location.href = window.location.href;		
+		window.location.reload(true);		
 	}
 </script>
-<script src="../../js/jquery-3.2.1.min.js"></script>
-<script src="../../js/my.js"></script>
+
 
 
 

@@ -20,16 +20,16 @@ function change_style(a)
 
 			});	
 			
-			$("#selectall").click(function() {
-
+			$("#selectall").on("click",function(){
+				//alert("called");	
 				if(this.checked)
 				{
-				$('#form-display input:checkbox').each(function(){
+				$(".del_check:checkbox").each(function(){
 					$(this).prop('checked',true);
 				});
 			}
 			else{
-				$('#form-display input:checkbox').each(function(){
+				$(".del_check:checkbox").each(function(){
 					$(this).prop('checked',false);
 				});
 			}

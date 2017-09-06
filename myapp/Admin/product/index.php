@@ -28,7 +28,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 	
 	$name = $_POST['name'];
 	$price = $_POST['price'];
-	//$insertstatus = $_REQUEST['status1'];
+	//$insertstatus = $_POST['status1'];
 	//insert data in product table
 	$query="insert into product(name,price) values('$name',$price);";
 	$q=mysqli_query($con,$query) or die("insert error");
@@ -159,8 +159,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 </td>
 </tr>
 
-<!--
-status of product
+
 <tr>
 	<td><label>Status Of Product</label></td>
 	<td>
@@ -179,7 +178,7 @@ status of product
 	</td>
 	
 </tr>
--->
+
 
 <tr>
 	<td><label>Upload Product Images</label></td>
@@ -228,7 +227,8 @@ echo $page;
 
 
 
-<table border='1' width="500" cellpadding="10" cellspacing="0" align="center" id="table-display">
+<table border='1' width="500" cellpadding="10" cellspacing="0" align="center" id="table_display">
+
 	<tr>
 <td><input type='checkbox' id='selectall'></td>
 <td colspan='4'>
@@ -244,15 +244,15 @@ Select All
 <th>Status</th>
 <th>edit</th>
 
-
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="../../js/my.js"></script>
 <script src="js/my.js"></script>
 
 <?php
 	while($rec = mysqli_fetch_assoc($rs_result))
 	{
 		echo "<tr>";
-		echo "<td>"."<input type = 'checkbox' name='hobby[]' value='".$rec['id']."'>"."</td>";
+		echo "<td>"."<input type = 'checkbox' class='del_check' name='hobby[]' value='".$rec['id']."'>"."</td>";
 		echo "<td class='search'>".$rec['name']."</td>";
 		echo "<td class='search'>".$rec['price']."</td>";
 		?>
@@ -280,7 +280,7 @@ Select All
 		else{
 		?>
 		<td>
-		<div class="material-switch pull-left">
+		<div class="material-switch pull-left" >
                             <input id="someSwitchOptionSuccess<?php echo $rec['id'];?>" 
                             name="someSwitchOption001" 
                             type="checkbox" 
@@ -346,7 +346,7 @@ Select All
 				//echo $res['img_path'];
 				//$i++;
 			}	
-			//delte from image table
+			//delete from image table
 			 $q_del = "delete from images where product_id=$value";
 			 $del = mysqli_query($con,$q_del) or die(mysqli_error($con));
 
