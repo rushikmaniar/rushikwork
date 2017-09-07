@@ -1,0 +1,24 @@
+body {
+	background-color: #730099;
+	font-family: cursive;
+}
+h1{
+	color: #ffcc00;
+}
+table{
+	border : 10;
+}
+#p{
+	background: red;
+    padding: 0px 6px 0px 6px;
+	color: yellow;font-size: large;
+}
+button{
+	padding: 10px 10px 10px 10px;
+
+}
+
+.selectedPage{
+	background : red;
+	padding:0px 6px 0px 6px;
+}
