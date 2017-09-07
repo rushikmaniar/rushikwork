@@ -87,11 +87,11 @@
 					   this.value = this.checked ? 1 : 0;
 					   insertstatus = this.value;
 					  // console.log(insertstatus);
-					    alert(this.value);
+					    //alert(this.value);
 					});
 					
 					
-					$("#btn_add").on("click",function(){
+				/*	$("#btn_add").on("click",function(){
 						var id = $(this).attr("data-id");
 						//console.log(insertstatus);
 						$.ajax({
@@ -109,7 +109,7 @@
 						        }
 						
 					});
-					});		
+					});		*/
 					
 			//select all checkbox
 			$("#img_selectall").on("click",function() {

@@ -28,9 +28,17 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 	
 	$name = $_POST['name'];
 	$price = $_POST['price'];
-	//$insertstatus = $_POST['status1'];
+	$insertstatus = 1;
+	
 	//insert data in product table
-	$query="insert into product(name,price) values('$name',$price);";
+	if(isset($_POST['insertstatus'])){
+		$insertstatus = 1;
+	}
+	else{
+		$insertstatus = 0;
+	}
+	//echo $insertstatus;
+	$query="insert into product(name,price,status) values('$name',$price,$insertstatus);";
 	$q=mysqli_query($con,$query) or die("insert error");
 	
 
@@ -166,12 +174,15 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 		<div class="material-switch pull-left">
                             <input id="someSwitchOptionSuccess_insert" 
                             name="insertstatus" 
-                            type="checkbox"/ 
+                            type="checkbox"
                             checked="checked"
+                           	value = "1"
                             class="switch"
+                            
                        	  />
                             <label for="someSwitchOptionSuccess_insert" 
                             class="label-success switchBtn" 
+                            
                             ></label>
                         </div>	
 	</td>
@@ -189,8 +200,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 <center>
 <input type="submit" id="btn_add" name="add" value="Add" 
  class="btn-success btn-lg"
- data-id="<?php echo $last_id; ?>"
- data-status="<?php echo $rec['status'];?>" /> 
+  /> 
 </center>
 </td>
 </tr>
