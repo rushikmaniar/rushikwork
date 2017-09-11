@@ -13,6 +13,7 @@ class connection
 	{
 
 try {
+			//connect to database
 		     $this->dbh = new PDO("mysql:host=$this->db_hostname;dbname=bca",$this->db_username,$this->db_password);
 		     $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
 		    echo 'Connected to Database<br/>';
