@@ -11,26 +11,10 @@ if(!(isset($_SESSION['Admin'])))
 	");
 	//header ("location:../index.php");
 }
-
-
  ?>
-<?php 
-if(!(isset($_SESSION['Admin'])))
-{
-	die("<h3>If Your Admin Plase Login Please login</h3>
-	<a href = '../index.php'><button>Login</button></a>
-	<?php
-	");
-	//header ("location:../index.php");
-}
-
-
- ?>
-
 <?php
 include "../conn.php";
-session_start();
- $obj = new connection("localhost","root","","bca");
+$con = new connection();
 $username1 = $_SESSION['username'];
 ?>
 
@@ -61,8 +45,10 @@ My App
 <?php
 $id = $_REQUEST['id'];
 $display_query = "SELECT * FROM user where id = $id "; 
-$rs_result = mysqli_query($obj->con,$display_query); //run the query
-$rec = mysqli_fetch_assoc($rs_result);
+$sth = $con->dbh->query($display_query);
+
+$rec = $sth->fetch(PDO::FETCH_BOTH);
+$row_count = $sth->fetchColumn();
 
 $firstname = $rec['firstname'];
 $lastname = $rec['lastname'];
@@ -70,20 +56,14 @@ $username = $rec['username'];
 $password = $rec['password'];
 $user_type = $rec['user_type'];
 
-
 if(isset($_POST['update'])){
-
 	$firstname = $_POST['fname'];
 	$lastname = $_POST['lname'];
 	$username = $_POST['uname'];
 	$password = $_POST['pas'];
 	$user_type = $_POST['user_type'];
-
-	$obj->Update_User($id,$firstname,$lastname,$username,$password,$user_type);
-
+	$con->Update_User($id,$firstname,$lastname,$username,$password,$user_type);
 }
-
-
 ?>
 
 
@@ -167,6 +147,7 @@ if(isset($_POST['update'])){
 </tr>
 </table>
 </form>
+<center><a href="manage_user.php">Go Back To Manage User</a></center>
 </body>
 </html>
 <script src="../js/jquery/jquery.min.js"></script>

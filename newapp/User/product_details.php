@@ -47,16 +47,8 @@ My App
 
 <!-- Logic of Pagianation-->
 <?php 
-$num_rec_per_page=5;
-if (isset($_REQUEST["page"])) { 
-		$page  = $_REQUEST["page"]; 
-	} 
-else { 
-	$page=1; 
-};
-
-$start_from = ($page-1) * $num_rec_per_page; 
-$display_query = "SELECT * FROM product where status = 1 LIMIT $start_from, $num_rec_per_page"; 
+$p_id = $_REQUEST['p_id'];
+$display_query = "SELECT * FROM product where status = 1 and id=$p_id"; 
 $rs_result = $con->dbh->query($display_query);
 
 //echo $page;
@@ -122,29 +114,30 @@ $rs_result = $con->dbh->query($display_query);
 		?>
 	
 		<td>
+		<font class="h3 text-info"><?php echo $rec['name']; ?></font>
+		<br>
+		<font class="h2 text-bold">Rs. <?php echo $rec['price']; ?></font>
+		<br>
 		<?php
 		//$imgid = $res['img_id'];
 					//$i = $res['img_id'];
 			$dir = "http://localhost/github/rushikwork/newapp/Admin/product/Uploadfolder/images/";
 
 			$id = $rec['id'];
-			$sql = "select * from images where product_id=$id LIMIT 1";
+			$sql = "select * from images where product_id=$id";
 			$img_sel = $con->dbh->query($sql);
 			while($res = $img_sel->fetch(PDO::FETCH_BOTH)){
 				
+				echo "<a href = '".$dir.$res['img_name']."'>";
 				?>
+				
 				 <img src="<?php echo $dir.$res['img_name'] ?>" alt="not found">
+				 </a>
 				 &emsp;
 				
 				<?php
 			}	
 		?>		
-		<br>
-		<a href="product_details.php?p_id=<?php echo $rec['id']; ?>">		
-		<font class="h3 text-info"><?php echo $rec['name']; ?></font>
-		</a>
-		<br>
-		<font class="h2 text-bold">Rs. <?php echo $rec['price']; ?></font>
 		</td>
 		
 		<?php
@@ -157,46 +150,12 @@ $rs_result = $con->dbh->query($display_query);
 ?>
 
 </table>
-
-<h3 align="center">Pages</h3>
 <br>
 <center>
-<?php
-$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM product"; 
-$sth = $con->dbh->query($sql);
-
-$result = $con->dbh->query("SELECT FOUND_ROWS()"); 
-
-$row_count =$result->fetchColumn();
-$total_records = $row_count;  //count number of records
-$total_pages = ceil($total_records / $num_rec_per_page); 
-?>
-
-<a href='index.php?page=1' id='page' style="color: red;font-size: large;">|<</a> 
 <script src="../js/jquery/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/my.js"></script>
-<?php
-
-for ($i=1; $i<=$total_pages; $i++) { 
-	?>
-            <a href='index.php?page=<?php echo $i ?>' style="color: black;font-size: large;" id="<?php echo 'link'.$i; ?>" ><?php echo $i; ?></a> 
-<?php
-};
-
-if(isset($page))
-{
-	echo " <script> change_style($page); </script>";
-}
-?>
-
-<a href='index.php?page=<?php echo $total_pages ?>' style="color: red;font-size: large;"> >|</a> 
 </center>
-
-
-
-
-
 </body>
 </html>
 

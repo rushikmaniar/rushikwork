@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>My App</title>
@@ -8,26 +8,32 @@
 <body style="background-color: yellow;">
 <?php  
 $id = $_GET['id'];
-$con = mysqli_connect("localhost","root","","bca");
+require_once("../../conn.php");
+$con = new connection();
 
 //data from product(name,price)
 $query = "SELECT * FROM product WHERE id=$id";
-$q = mysqli_query($con,$query);
-$rec = mysqli_fetch_array($q);
+$sth = $con->dbh->query($query);
+
+$rec = $sth->fetch(PDO::FETCH_BOTH);
 $name1 = $rec['name'];
 
 //data from images table
 $sql = "select * from images where product_id=$id";
-$q1 = mysqli_query($con,$sql);
-//$res = mysqli_fetch_array($q1);
+$img_sel = $con->dbh->query($sql);
+
 
 if(isset($_POST['update'])  && $_POST['update']=="Update"){
 	$name = $_POST['name'];
 	$price = $_POST['price'];
+	try{
 	$sql = "UPDATE product SET name='$name', price='$price' WHERE id=$id";
-	$query = mysqli_query($con,$sql);
-	if($query){echo "update successfully";}
-
+	$sth = $con->dbh->query($sql);
+	
+	echo "update successfully";
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
 	$id = $rec['id'];
 	
 	$errors = array();
@@ -81,7 +87,8 @@ if(isset($_POST['update'])  && $_POST['update']=="Update"){
 						(product_id,img_name) 
 						values 
 						($id,'$name')";
-						$q=mysqli_query($con,$query);
+						$sth = $con->dbh->query($query);
+						
 					}
 				}
 				
@@ -128,10 +135,11 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 
 			//Deleting images 
 			$sql = "select * from images where img_id=$value";
-			$q1 = mysqli_query($con,$sql);
+			$q1 = $con->dbh->query($sql);
+			
 			$dir = "UploadFolder/images/";
 
-			while($res = mysqli_fetch_array($q1)){
+			while($res = $q1->fetch(PDO::FETCH_BOTH)){
 				$filename= $dir.$res['img_name'];
 				
 			    if (file_exists($filename)) {
@@ -145,12 +153,19 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 			}	
 			//delete from image table
 			 $q_del = "delete from images where img_id=$value";
-			 $del = mysqli_query($con,$q_del) or die(mysqli_error($con));
+			 try{
+			 $sth = $con->dbh->query($q_del);
+			 
+			header("location:update_product.php?id=$id");
 
-				header("location:update_product.php?id=$id");
-		}
+			}catch(PDOException $e){
+				$e->getMessage();
+			}
+			
 		}
 	}
+}
+	
 
 ?>
 <h1 class="h1">Update Product</h1>
@@ -234,7 +249,8 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 			?>
 			
 			<?php
-			while($res = mysqli_fetch_array($q1)){
+
+			while($res = $img_sel->fetch(PDO::FETCH_BOTH)){
 				?>
 				 <img src="<?php echo $dir.$res['img_name'] ?>" alt="not found">
 				<?php 
@@ -256,6 +272,7 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 </table>
 
 </form>
+<center><a href="index.php">Go Back TO Product List</a></center>
 </body>
 </html>
 <script src="js/jquery-3.2.1.min.js"></script>

@@ -13,7 +13,7 @@
 <?php
 require_once "conn.php";
 
-$obj = new connection("localhost","root","","bca");
+$obj = new connection();
 
 
 
@@ -77,7 +77,9 @@ My App
 
   </table>
 </form>
-
+<center>
+<a href="index.php">Alerady Member ? </a>
+</center>
 </body>
 </html>
 <!-- Javascript Include -->

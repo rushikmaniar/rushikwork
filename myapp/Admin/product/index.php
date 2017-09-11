@@ -1,15 +1,8 @@
 <!-- Connection of Database-->
-<?php
-session_start();
-$con=mysqli_connect("localhost","root","","bca");
-if($con){
-	echo "connection succes";
-}
-else{
-	echo mysqli_error($con);
-}
-?>
-
+<?php 
+require_once("../../conn.php");
+$con = new connection();
+ ?>
 <html>
 <head>
 
@@ -39,11 +32,11 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 	}
 	//echo $insertstatus;
 	$query="insert into product(name,price,status) values('$name',$price,$insertstatus);";
-	$q=mysqli_query($con,$query) or die("insert error");
-	
+	$sth = $con->dbh->query($query);
+		
 
 	//last insert record id
-	$last_id = mysqli_insert_id($con);
+	$last_id = $con->dbh->lastInsertId();
 	
 	$errors = array();
 				$uploadedFiles = array();
@@ -96,8 +89,9 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 						(product_id,img_name) 
 						values 
 						($last_id,'$name')";
-						$q=mysqli_query($con,$query);
-					}
+						$sth = $con->dbh->query($query);
+						
+						}
 				}
 				
 				if($counter>0){
@@ -136,7 +130,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 ?>
 
 <body>
-
+<a href="../index.php"> &lt;-Go To Admin Panel</a>
 <h1 align="center" class="h1">Product List</h1>
 <!--<h1>insert data into bca student</h1> -->
 <br>
@@ -231,12 +225,11 @@ else {
 
 $start_from = ($page-1) * $num_rec_per_page; 
 $display_query = "SELECT * FROM product LIMIT $start_from, $num_rec_per_page"; 
-$rs_result = mysqli_query($con,$display_query); //run the query
-echo $page;
+$sth = $con->dbh->query($display_query);
+
+//echo $page;
 
 ?>
-
-
 
 <table border='1' width="500" cellpadding="10" cellspacing="0" align="center" id="table_display">
 
@@ -255,12 +248,12 @@ Select All
 <th>Status</th>
 <th>edit</th>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="../../js/my.js"></script>
-<script src="js/my.js"></script>
+
 
 <?php
-	while($rec = mysqli_fetch_assoc($rs_result))
+
+
+	while($rec = $sth->fetch())
 	{
 		echo "<tr>";
 		echo "<td>"."<input type = 'checkbox' class='del_check' name='hobby[]' value='".$rec['id']."'>"."</td>";
@@ -322,7 +315,9 @@ Select All
 ?>
 
 <tr><td colspan="5" height="70"><center><input type="submit" name="delete" value="Delete" class="btn-danger btn-lg" />
-
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="../../js/my.js"></script>
+<script src="js/my.js"></script>
 </center>
 </td>
 </tr>
@@ -340,14 +335,17 @@ Select All
 			//deleting data
 			echo "key=".$key."value=".$value;
 			$query = "delete from product where id =$value" ;
-			mysqli_query($con,$query);
+			$sth = $con->dbh->query($query);
+			
 
 			//Deleting images 
 			$sql = "select * from images where product_id=$value";
-			$q1 = mysqli_query($con,$sql);
+			$sth = $con->dbh->query($sql);
+			
+
 			$dir = "UploadFolder/images/";
 
-			while($res = mysqli_fetch_array($q1)){
+			while($res = $sth->fetch()){
 				$filename= $dir.$res['img_name'];
 				
 			    if (file_exists($filename)) {
@@ -361,7 +359,8 @@ Select All
 			}	
 			//delete from image table
 			 $q_del = "delete from images where product_id=$value";
-			 $del = mysqli_query($con,$q_del) or die(mysqli_error($con));
+			 $sth = $con->dbh->query($q_del);
+			 
 
 			header("location:index.php");
 		}
@@ -373,9 +372,12 @@ Select All
 <br>
 <center>
 <?php
-$sql = "SELECT * FROM product"; 
-$rs_result = mysqli_query($con,$sql); //run the query
-$total_records = mysqli_num_rows($rs_result);  //count number of records
+$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM product"; 
+$sth = $con->dbh->query($sql);
+
+$result = $con->dbh->query("SELECT FOUND_ROWS()"); 
+
+$total_records = $result->fetchColumn();
 $total_pages = ceil($total_records / $num_rec_per_page); 
 ?>
 

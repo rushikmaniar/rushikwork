@@ -227,7 +227,7 @@ $start_from = ($page-1) * $num_rec_per_page;
 $display_query = "SELECT * FROM product LIMIT $start_from, $num_rec_per_page"; 
 $sth = $con->dbh->query($display_query);
 
-echo $page;
+//echo $page;
 
 ?>
 
@@ -248,9 +248,7 @@ Select All
 <th>Status</th>
 <th>edit</th>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="../../js/my.js"></script>
-<script src="js/my.js"></script>
+
 
 <?php
 
@@ -317,7 +315,9 @@ Select All
 ?>
 
 <tr><td colspan="5" height="70"><center><input type="submit" name="delete" value="Delete" class="btn-danger btn-lg" />
-
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="../../js/my.js"></script>
+<script src="js/my.js"></script>
 </center>
 </td>
 </tr>
