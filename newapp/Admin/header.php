@@ -1,5 +1,5 @@
 <!-- header.php -->
-<header class="head">
+<header>
 	<a href = "index.php">
 <img src="pics/logo1.png" alt="logo" style="border-radius: 15px">
 <button class="btn-default btn-lg">

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if(!(isset($_SESSION['Admin'])))
 {
@@ -9,9 +9,7 @@ if(!(isset($_SESSION['Admin'])))
 	//header ("location:../index.php");
 }
 
-
  ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,22 +18,7 @@ if(!(isset($_SESSION['Admin'])))
 	<link rel="stylesheet" type="text/css" href="../css/my.css">
 </head>
 <body>
-
-<header class="head">
-<a href = "../index.php">
-<img src="../pics/logo1.png" alt="logo" style="border-radius: 15px">
-<button class="btn-default btn-lg">
-My App
-</button>
-</a>
-<div align="right">
-	<a href="../logout.php">
-<button class="btn btn-default btn-lg" id="btn-logout">Logout</button>
-</a>
-</div>
-</header>
-
-
+<?php include_once("../header.php"); ?>
 <h1 class="h1">Hi Admin <?php echo $_SESSION['username']; ?></h1>
 <h2 class="h2" align="center">What Do You Want To Do ?</h2><br>
 <a href="manage_user.php">
@@ -45,6 +28,7 @@ My App
 <button class="btn btn-default btn-lg">Manage product</button>
 </a>
 </body>
+<?php require_once("../footer.php"); ?>
 </html>
 <script src="../js/jquery/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>

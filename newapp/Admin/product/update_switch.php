@@ -8,8 +8,8 @@
      $("#resultarea").text(data);
   }
 });*/
-
-$con = mysqli_connect("localhost","root","","bca");
+require_once("../../conn.php");
+$con = new connection();
 $id = $_REQUEST['rowid'];
 $status = $_REQUEST['status'];
  // data passed here
@@ -21,5 +21,6 @@ $status = $_REQUEST['status'];
 <?php
 
 $sql = "UPDATE product SET status=$status WHERE id=$id";
-mysqli_query($con,$sql);
+$sth = $con->dbh->query($sql);
+
 ?>

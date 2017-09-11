@@ -1,12 +1,7 @@
 <?php session_start(); ?>
 <?php
-$con=mysqli_connect("localhost","root","","bca");
-if($con){
-	echo "connection succes";
-}
-else{
-	echo mysqli_error($con);
-}
+require_once("../conn.php");
+$con = new connection();
 ?>
 
 
@@ -57,7 +52,8 @@ else {
 
 $start_from = ($page-1) * $num_rec_per_page; 
 $display_query = "SELECT * FROM product where status = 1 LIMIT $start_from, $num_rec_per_page"; 
-$rs_result = mysqli_query($con,$display_query); //run the query
+$rs_result = $con->dbh->query($display_query);
+
 echo $page;
 
 ?>
@@ -71,7 +67,7 @@ echo $page;
 <input type="text"  id="string" placeholder="Search.." class="input-lg" />
 </center>
 <?php
-	while($rec = mysqli_fetch_assoc($rs_result))
+	while($rec = $rs_result->fetch(PDO::FETCH_BOTH))
 	{
 		echo "<tr>";
 		echo "<td class='search'>".$rec['name']."</td>";
@@ -87,9 +83,13 @@ echo $page;
 <br>
 <center>
 <?php
-$sql = "SELECT * FROM product"; 
-$rs_result = mysqli_query($con,$sql); //run the query
-$total_records = mysqli_num_rows($rs_result);  //count number of records
+$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM product"; 
+$sth = $con->dbh->query($sql);
+
+$result = $con->dbh->query("SELECT FOUND_ROWS()"); 
+
+$row_count =$result->fetchColumn();
+$total_records = $row_count;  //count number of records
 $total_pages = ceil($total_records / $num_rec_per_page); 
 ?>
 

@@ -77,7 +77,9 @@ My App
 
   </table>
 </form>
-
+<center>
+<a href="index.php">Alerady Member ? </a>
+</center>
 </body>
 </html>
 <!-- Javascript Include -->

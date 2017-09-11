@@ -11,17 +11,10 @@ if(!(isset($_SESSION['Admin'])))
 	");
 	//header ("location:../index.php");
 }
-
-
- ?>
+?>
 <?php
-$con=mysqli_connect("localhost","root","","bca");
-if($con){
-	echo "<font class='mysuccess'>connection succes</font>";
-}
-else{
-	echo mysqli_error($con);
-}
+require_once("../conn.php");
+$con = new connection();
 $username1 = $_SESSION['username'];
 ?>
 
@@ -56,14 +49,7 @@ if(isset($_POST['add']) && $_POST['add']=="Add"){
 	$password = $_POST['pas'];
 	$user_type = $_POST['user_type'];
 
-	$query="insert into user(firstname,lastname,username,password,user_type) values('$firstname','$lastname','$username','$password','$user_type');";
-	$q=mysqli_query($con,$query) or die("insert error");
-	if($q){
-		echo "User Added Successfully";
-	}
-	//echo mysqli_error($con);
-	//header("location:index.php");
-	//exit();
+	$con->Add_User($firstname,$lastname,$username,$password,$user_type);
 }	
 	
 
@@ -171,8 +157,16 @@ else {
 };
 
 $start_from = ($page-1) * $num_rec_per_page; 
+
+try{
 $display_query = "SELECT * FROM user where username !='$username1' LIMIT $start_from, $num_rec_per_page "; 
-$rs_result = mysqli_query($con,$display_query); //run the query
+
+$sth = $con->dbh->query($display_query);
+
+
+}catch(PDOException $e){
+	echo $e->getMessage();
+}
 echo $page;
 
 ?>
@@ -197,10 +191,10 @@ Select All
 
 
 <?php
-	while($rec = mysqli_fetch_assoc($rs_result))
+	while($rec = $sth->fetch())
 	{
 		echo "<tr>";
-		echo "<td>"."<input type = 'checkbox' name='hobby[]' value='".$rec['id']."'>"."</td>";
+		echo "<td>"."<input type = 'checkbox' class='del_check' name='hobby[]' value='".$rec['id']."'>"."</td>";
 		echo "<td class='search'>".$rec['firstname']."</td>";
 		echo "<td class='search'>".$rec['lastname']."</td>";
 		echo "<td class='search'>".$rec['username']."</td>";
@@ -232,7 +226,8 @@ Select All
 		{	
 			echo "key=".$key."value=".$value;
 			$query = "delete from user where id =" . $value ;
-			mysqli_query($con,$query);
+			$sth = $con->dbh->query($query);
+			
 			header("location:manage_user.php");
 		}
 		}
@@ -243,27 +238,30 @@ Select All
 <br>
 <center>
 <?php
-$sql = "SELECT * FROM user where username !='$username1'"; 
-$rs_result = mysqli_query($con,$sql); //run the query
-$total_records = mysqli_num_rows($rs_result);  //count number of records
+$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM user where username !='$username1'"; 
+$sth = $con->dbh->query($sql);
+		 
+		$result = $con->dbh->query("SELECT FOUND_ROWS()"); 
+		
+		$total_records = $result->fetchColumn();
 $total_pages = ceil($total_records / $num_rec_per_page); 
 ?>
 
-<a href='index.php?page=1' id='page' style="color: yellow;font-size: large;">|<</a> 
+<a href='index.php?page=1' id='page' style="color: red;font-size: large;">|<</a> 
 
 <?php
 
 for ($i=1; $i<=$total_pages; $i++) { 
 	?>
-            <a href='index.php?page=<?php echo $i ?>' style="color: white;font-size: large;" id="<?php echo 'link'.$i; ?>" ><?php echo $i; ?></a> 
+            <a href='index.php?page=<?php echo $i ?>' style="color: green;font-size: large;" id="<?php echo 'link'.$i; ?>" ><?php echo $i; ?></a> 
 <?php
 };
 ?>
 
+
 <script src="../js/jquery/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/my.js"></script>
-
 <?php
 if(isset($page))
 {
@@ -271,7 +269,7 @@ if(isset($page))
 }
 ?>
 
-<a href='manage_user.php?page=<?php echo $total_pages ?>' style="color: yellow;font-size: large;"> >|</a> 
+<a href='manage_user.php?page=<?php echo $total_pages ?>' style="color: red;font-size: large;"> >|</a> 
 </center>
 
 </body>

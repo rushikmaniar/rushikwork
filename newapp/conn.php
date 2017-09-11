@@ -29,15 +29,14 @@ catch(PDOException $e)
 		$query = "SELECT SQL_CALC_FOUND_ROWS username,password,user_type FROM user 
 		WHERE username='$uname' and password='$pas'";
 		
-		$sth = $this->dbh->prepare($query);
-		$sth->execute(); 
-		$result = $this->dbh->prepare("SELECT FOUND_ROWS()"); 
-		$result->execute();
+		$sth = $this->dbh->query($query);
+		$result = $this->dbh->query("SELECT FOUND_ROWS()"); 
 		
-		//$res = $sth->fetchAll(PDO::FETCH_BOTH);
-
+		$res = $sth->fetch(PDO::FETCH_BOTH);
+		//$result->store_result;
+		$row_count = $result->fetchColumn();
 		
-			if($result->fetchColumn() > 0)
+			if($row_count > 0)
 			{
 				$_SESSION["test"]=time();
 				$_SESSION['username'] = $uname;
@@ -47,7 +46,7 @@ catch(PDOException $e)
 					setcookie("name",$uname);
 					setcookie("password",$pas);
 				}
-				if($rec['user_type'] == 'Admin'){
+				if($res['user_type'] == 'Admin'){
 					$_SESSION['Admin'] = "Admin";
 					header("Location:Admin/");
 				}
@@ -72,48 +71,48 @@ catch(PDOException $e)
 	
 //insert
 
+
 	public function insert($fname,$lname,$uname,$pas)
 		{
-			
+	
+			try{
 			$query="insert into user(firstname,lastname,username,password,user_type) values('$fname','$lname','$uname','$pas','subscriber');";
 			
-			$sth = $this->dbh->prepare($query);
-			// $sth->execute();
-
-			if($sth->execute())	
-			{
-				$_SESSION['username'] = $uname;
-				$_SESSION['password'] = $pas;
-				header("location:User/index.php");
-			}
-			else{
-				echo "<font class = 'mydanger'>UserName Exists Or Something Wrong </font><br>";
-			}
-				
+			$sth = $this->dbh->query($query);
+			header("location:index.php");
+			}catch(PDOException $e){
+				if($e->getCode() == 23000){
+				echo "<br><font color = 'red'>User Alerady exists or Something Wrong </font>";
+				}
+				else{
+				echo $e->getMessage();
+				}
 		}
+
 		
-	
-/*
+		}
+
 	public function Add_User($fname,$lname,$uname,$pas,$user_type)
 		{
-			
-			$query="insert into user(firstname,lastname,username,password,user_type) values('$fname','$lname','$uname','$pas',$user_type);";
-			$q = mysqli_query($this->con,$query);
-			
-			if($q)	
-			{
-				echo "<font class = 'mysuccess'> User Added Successfully </font><br>";
-				//header("location:User/index.php");
-			}
-			else
-				echo "<font class = 'mydanger'> Something Wrong </font><br>";
-				echo mysqli_error($this->con);
-		}
+			try{
+			$query="insert into user(firstname,lastname,username,password,user_type) values('$fname','$lname','$uname','$pas','$user_type');";
+			$sth = $this->dbh->query($query);
+			echo "User Added Successfully";
+			}catch(PDOException $e){
+				if($e->getCode() == 23000){
+				echo "<br><font color = 'red'>User Alerady exists or Something Wrong </font>";
+				}
+				else{
+				echo $e->getMessage();
+				}
 
+			}
+		}
+			
 
 	public function Update_User($id,$fname,$lname,$uname,$pas,$user_type)
 		{
-			
+			try{
 			$query = "update user set 
 			firstname='$fname',
 			lastname='$lname',
@@ -122,22 +121,12 @@ catch(PDOException $e)
 			user_type='$user_type'
 			where id = $id
 			";
-			$q = mysqli_query($this->con,$query);
-			
-			if($q)	
-			{
-				echo "<font class = 'mysuccess'> User Updated Successfully </font><br>";
-				//header("location:User/index.php");
-			}
-			else
+			$sth = $this->dbh->query($query);
+			echo "<font class = 'mysuccess'> User Updated Successfully </font><br>";
+			}catch(PDOException $e){
 				echo "<font class = 'mydanger'> Something Wrong </font><br>";
-				echo mysqli_error($this->con);
+				echo $e->getMessage();
+			}
 		}
-		
-
-*/
 }
-
-
-
 ?>
