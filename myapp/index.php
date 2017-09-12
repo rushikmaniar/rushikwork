@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require_once("config/conn.php"); ?>
 <?php $con = new connection(); ?>
 <?php $con->get_header(); ?>
@@ -14,7 +15,7 @@
       //$_SESSION["username"] = $uname;
       //$_SESSION["password"] = $pas;
      // header("location:user.php");
-      $r = $obj->check_login($uname,$pas);
+      $r = $con->check_login($uname,$pas);
     }
 ?>
     <h1 align="center" class="h1">login.php</h1>

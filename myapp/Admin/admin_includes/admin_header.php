@@ -9,7 +9,7 @@
 <body>
 <header class="head">
 	<a href = "index.php">
-<img src="http://localhost/github/rushikwork/myapp/images/logo/logo1.png" alt="logo" style="border-radius: 15px">
+<img src="http://localhost/github/rushikwork/myapp/images/logo/logo1.png" alt="logo" style="border-radius: 15px; background-color: white;">
 <button class="btn-default btn-lg">
 My App
 </button>

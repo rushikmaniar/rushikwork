@@ -1,20 +1,43 @@
 <!-- connection to database -->
 <?php
-class connection
-{
+//echo "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; 
+//echo $_SERVER["DOCUMENT_ROOT"];exit;
+define('BASE_URL','http://localhost/github/rushikwork/myapp');
+//echo $base_url = realpath(dirname(__FILE__)."/../");
+//echo "<br>";
+//echo $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+/*function getBaseUrl(){
+    // output: /myproject/index.php
+    $currentPath = $_SERVER['PHP_SELF']; 
+    
+    // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index ) 
+    $pathInfo = pathinfo($currentPath); 
+    
+    // output: localhost
+    $hostName = $_SERVER['HTTP_HOST']; 
+    
+    // output: http://
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
+    // return: http://localhost/myproject/
+    return $protocol.$hostName.$pathInfo['dirname'];
+	}*/
+class connection{
 	public $db_hostname='localhost';
 	public $db_username='root';
 	public $db_password='';
 	public $start_time;
 	public $dbh;
+	
 	//mysql connection constructor
 	public function __construct()
 	{
+		//echo $this->getBaseUrl();exit;
 		try {
 			//connect to database
 		     $this->dbh = new PDO("mysql:host=$this->db_hostname;dbname=bca",$this->db_username,$this->db_password);
 		     $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
-		    echo 'Connected to Database<br/>';
+		    
+		    echo '<script> console.log("Connected to Database")</script>';
 		}catch(PDOException $e)
 		{
 	    	echo $e->getMessage();
@@ -114,10 +137,18 @@ class connection
 			}
 		}
 	public function get_header(){
-		require_once("./includes/header.php");
+		//echo $url = realpath(dirname(__ROOT__));exit;
+		require_once(BASE_URL."/includes/header.php");
 	}
 	public function get_footer(){
-		require_once("./includes/footer.php");
+		require_once(BASE_URL."/includes/footer.php");
+	}
+	public function get_admin_header(){
+		//echo $url = realpath(dirname(__ROOT__));exit;
+		require_once(BASE_URL."/Admin/admin_includes/admin_header.php");
+	}
+	public function get_admin_footer(){
+		require_once(BASE_URL."/Admin/admin_includes/admin_footer.php");
 	}
 }
 ?>
