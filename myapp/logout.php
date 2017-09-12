@@ -5,5 +5,4 @@ unset($_SESSION['username']);
 setcookie("name","");
 setcookie("password","");
 header("location:index.php");
-
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once "conn.php";
 	//ini_set('session.ge_maxlife',$fixtime);
 	/*echo $_SESSION['test']."<br>";
@@ -17,26 +17,22 @@
 		header("location:index.php");
 	}
 	*/
- 
 
- ?>
-
+?>
 <!DOCTYPE html>
 <html>
-<head>
-	<title>login success</title>
-</head>
-<body>
-<div align="right">
-<a href="logout.php"> 
-<button>logout</button>
-</a>
-</div>
-<h1>Hi</h1>
-<?php
-echo "<h1>".$_SESSION['username']."</h1>"."<br>";
-
-  ?>
-
-</body>
+	<head>
+		<title>login success</title>
+	</head>
+	<body>
+		<div align="right">
+			<a href="logout.php">
+				<button>logout</button>
+			</a>
+		</div>
+		<h1>Hi</h1>
+		<?php
+		echo "<h1>".$_SESSION['username']."</h1>"."<br>";
+		?>
+	</body>
 </html>
