@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="http://localhost/github/rushikwork/myapp/assets/css/my.css">
 </head>
 <body>
-<header class="head">
+<header class="admin_head">
 	<a href = "index.php">
 <img src="http://localhost/github/rushikwork/myapp/images/logo/logo1.png" alt="logo" style="border-radius: 15px; background-color: white;">
 <button class="btn-default btn-lg">

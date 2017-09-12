@@ -6,6 +6,14 @@
 	font-size: 50;
 	font-weight: 10;
 }
+.admin_head{
+    height: 30%;
+    width: 100%;
+    background-color: orange;
+    color : white;
+    font-size: 50;
+    font-weight: 10;
+}
 h1{
 	font-size: large;
 	color: Black;
@@ -77,6 +85,14 @@ table{
     height: 30%;
     width: 100%;
     background-color: gray;
+    color : white;
+    font-size: 50;
+    font-weight: 10;
+}
+.admin_myfooter{
+    height: 40%;
+    width: 100%;
+    background-color: green;
     color : white;
     font-size: 50;
     font-weight: 10;
