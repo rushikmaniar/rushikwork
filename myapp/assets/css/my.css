@@ -82,15 +82,15 @@ table{
     left: 20px;
 }
 .myfooter{
-    height: 30%;
     width: 100%;
     background-color: gray;
     color : white;
     font-size: 50;
     font-weight: 10;
+    padding-bottom: 100px;
 }
 .admin_myfooter{
-    height: 40%;
+    padding-bottom: 100px;
     width: 100%;
     background-color: green;
     color : white;

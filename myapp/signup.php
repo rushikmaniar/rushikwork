@@ -1,14 +1,7 @@
 <?php session_start(); ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>My App</title>
-    <!-- Css Include -->
-    <link rel="stylesheet" type="text/css" href="css/my.css">
-  </head>
   <?php
-  require_once "conn.php";
-  $obj = new connection();
+  require_once "includes/header.php";
+  $con = new connection();
   if(isset($_POST['insert_btn'])  && ($_POST['insert_btn']=="SignUp" ))
   {
   $firstname = $_POST['firstname'];
@@ -19,18 +12,9 @@
   $_SESSION['lastname'] = $lastname;
   $_SESSION['username'] = $username;
   $_SESSION['password'] = $password;
-  $obj->insert($firstname,$lastname,$username,$password);
+  $con->insert($firstname,$lastname,$username,$password);
   }
   ?>
-  <body>
-    <header class="head">
-      <a href = "index.php">
-        <img src="pics/logo1.png" alt="logo" style="border-radius: 15px">
-        <button class="btn-default">
-        My App
-        </button>
-      </a>
-    </header>
     <h1 align="center" class="h1">SignUp.php</h1>
     <form method="POST">
       <table align="center" border="5" class="table-condensed" width="30%">
@@ -58,9 +42,4 @@
     <center>
     <a href="index.php">Alerady Member ? </a>
     </center>
-  </body>
-</html>
-<!-- Javascript Include -->
-<script src="js/jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="js/my.js"></script>
+  <?php $con->get_footer(); ?>

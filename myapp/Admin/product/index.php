@@ -1,16 +1,8 @@
 <!-- Connection of Database-->
 <?php
-require_once("../../conn.php");
+require_once("admin_includes/admin_header.php");
 $con = new connection();
 ?>
-<html>
-	<head>
-		<!-- css file include-->
-		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../../css/my.css">
-		<!-- javascript file include-->
-	</head>
-	<!-- Data Insert -->
 	<?php
 	//Insert Data
 	if(isset($_POST['add']) && $_POST['add']=="Add"){

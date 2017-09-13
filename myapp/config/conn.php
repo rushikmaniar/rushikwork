@@ -1,30 +1,6 @@
 <!-- connection to database -->
 <?php
-//echo "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; 
-//echo $_SERVER["DOCUMENT_ROOT"];exit;
-define('BASE_URL','http://localhost/github/rushikwork/myapp');
-define('BASE_PATH',str_ireplace(array('index.php','/User/','/uploads/'),'',$_SERVER['SCRIPT_FILENAME']));
-//echo BASE_PATH;
-//exit();
-
-//echo $base_url = realpath(dirname(__FILE__)."/../");
-//echo "<br>";
-//echo $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-/*function getBaseUrl(){
-    // output: /myproject/index.php
-    $currentPath = $_SERVER['PHP_SELF']; 
-    
-    // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index ) 
-    $pathInfo = pathinfo($currentPath); 
-    
-    // output: localhost
-    $hostName = $_SERVER['HTTP_HOST']; 
-    
-    // output: http://
-    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
-    // return: http://localhost/myproject/
-    return $protocol.$hostName.$pathInfo['dirname'];
-	}*/
+//echo "included config";
 class connection{
 	public $db_hostname='localhost';
 	public $db_username='root';
@@ -69,10 +45,10 @@ class connection{
 				}
 				if($res['user_type'] == 'Admin'){
 					$_SESSION['Admin'] = "Admin";
-					header("Location:Admin/");
+					header("Location:admin/");
 				}
 				else{
-					header("location:User/");
+					header("location:user/");
 				}
 			}
 			else
@@ -142,20 +118,20 @@ class connection{
 		}
 	public function get_header(){
 		//echo $url = realpath(dirname(__ROOT__));exit;
-		require_once(BASE_PATH."/includes/header.php");
+		//require_once(BASE_PATH."/includes/header.php");
 		//include ("/includes/header.php");
 	}
 	public function get_footer(){
-		//require_once(BASE_URL."/includes/footer.php");
+		require_once(BASE_URL."/includes/footer.php");
 		//include(BASE_URL."/includes/footer.php");
 	}
 	public function get_admin_header(){
 		//echo $url = realpath(dirname(__ROOT__));exit;
-		//require_once(BASE_URL."/Admin/admin_includes/admin_header.php");
+		require_once(BASE_URL."/admin/admin_includes/admin_header.php");
 		//include("/Admin/admin_includes/admin_header.php");
 	}
 	public function get_admin_footer(){
-		//require_once(BASE_URL."/Admin/admin_includes/admin_footer.php");
+		require_once(BASE_URL."/admin/admin_includes/admin_footer.php");
 		//include("/Admin/admin_includes/admin_footer.php");
 	}
 }

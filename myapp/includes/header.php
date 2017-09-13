@@ -1,4 +1,16 @@
 <!-- header.php -->
+<?php 
+//echo "<pre>";
+//print_r($basepath = $_SERVER['SCRIPT_FILENAME']);
+//echo "\n".__FILE__;
+$path = str_ireplace(array('includes'),'',dirname(__FILE__));
+//echo "\n".$path;
+//$base_url = $path;
+define('BASE_URL',$path);
+require_once(BASE_URL.'/config/conn.php');
+//echo "</pre>";
+//exit;
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

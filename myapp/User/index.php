@@ -1,8 +1,6 @@
 <?php session_start(); ?>
-<?php  require_once("../config/conn.php");
+<?php  require_once("../includes/header.php");
 $con = new connection();
-//require_once("../includes/header.php");
-$con->get_header();
 $query = "select * from user where username = '".$_SESSION['username']."'";
 $sth = $con->dbh->query($query);
 $user_info = $sth->fetch(PDO::FETCH_BOTH);
@@ -121,4 +119,4 @@ if(isset($page))
 }
 ?>
 <a href='index.php?page=<?php echo $total_pages ?>' style="color: red;font-size: large;"> >|</a> 
-<?php require_once("../includes/footer.php"); ?>
+<?php $con->get_footer(); ?>

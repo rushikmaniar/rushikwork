@@ -1,8 +1,7 @@
-<?php session_start(); ?>
-<?php require_once("config/conn.php"); ?>
-<?php $con = new connection(); ?>
-<?php //require_once("includes/header.php"); 
-$con->get_header(); ?>
+<?php session_start(); 
+require_once('includes/header.php');
+$con = new connection();
+?>
 <?php
 //check if cokkies are set
 if(isset($_COOKIE['name']) && isset($_COOKIE['password'])){
@@ -41,5 +40,6 @@ $r = $con->check_login($uname,$pas);
   <br>
 </form>
 <p align="center"><a href="signup.php">Not Memeber ?</a></p>
-<?php  //$con->get_footer();?>
-<?php require_once("includes/footer.php") ?>
+<?php  $con->get_footer();
+?>
+<?php //require_once("includes/footer.php"); ?>

@@ -1,4 +1,11 @@
 <!-- header.php -->
+<?php 
+$path = str_ireplace(array('admin_includes','admin'),'',dirname(__FILE__));
+//echo "\n".$path;
+//$base_url = $path;
+define('BASE_URL',$path);
+require_once(BASE_URL.'/config/conn.php');
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
