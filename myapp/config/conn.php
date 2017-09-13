@@ -3,6 +3,10 @@
 //echo "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; 
 //echo $_SERVER["DOCUMENT_ROOT"];exit;
 define('BASE_URL','http://localhost/github/rushikwork/myapp');
+define('BASE_PATH',str_ireplace(array('index.php','/User/','/uploads/'),'',$_SERVER['SCRIPT_FILENAME']));
+//echo BASE_PATH;
+//exit();
+
 //echo $base_url = realpath(dirname(__FILE__)."/../");
 //echo "<br>";
 //echo $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
@@ -138,17 +142,21 @@ class connection{
 		}
 	public function get_header(){
 		//echo $url = realpath(dirname(__ROOT__));exit;
-		require_once(BASE_URL."/includes/header.php");
+		require_once(BASE_PATH."/includes/header.php");
+		//include ("/includes/header.php");
 	}
 	public function get_footer(){
-		require_once(BASE_URL."/includes/footer.php");
+		//require_once(BASE_URL."/includes/footer.php");
+		//include(BASE_URL."/includes/footer.php");
 	}
 	public function get_admin_header(){
 		//echo $url = realpath(dirname(__ROOT__));exit;
-		require_once(BASE_URL."/Admin/admin_includes/admin_header.php");
+		//require_once(BASE_URL."/Admin/admin_includes/admin_header.php");
+		//include("/Admin/admin_includes/admin_header.php");
 	}
 	public function get_admin_footer(){
-		require_once(BASE_URL."/Admin/admin_includes/admin_footer.php");
+		//require_once(BASE_URL."/Admin/admin_includes/admin_footer.php");
+		//include("/Admin/admin_includes/admin_footer.php");
 	}
 }
 ?>
