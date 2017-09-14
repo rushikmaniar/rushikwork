@@ -13,7 +13,7 @@ if(!(isset($_SESSION['Admin'])))
 }
 ?>
 <?php
-include "../conn.php";
+require_once("admin_includes/admin_header.php");
 $con = new connection();
 $username1 = $_SESSION['username'];
 ?>
@@ -133,7 +133,5 @@ $username1 = $_SESSION['username'];
 		<center><a href="manage_user.php">Go Back To Manage User</a></center>
 	</body>
 </html>
-<script src="../js/jquery/jquery.min.js"></script>
-<script src="../js/my.js">
-	
 </script>
+<?php $con->get_admin_footer(); ?>

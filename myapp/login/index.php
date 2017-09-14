@@ -34,6 +34,7 @@ $r = $con->check_login($uname,$pas);
   <body>
 <div class="container">
 	<section id="content">
+		<h1>MY APP</h1><img src="../images/logo/logo1.png" alt="logo">
 		<form action="" method="post">
 			<h1>Login Form</h1>
 			<div>

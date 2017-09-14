@@ -13,28 +13,10 @@ if(!(isset($_SESSION['Admin'])))
 }
 ?>
 <?php
-require_once("../conn.php");
+require_once("admin_includes/admin_header.php");
 $con = new connection();
 $username1 = $_SESSION['username'];
 ?>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/my.css">
-		<header class="head">
-			<a href = "../index.php">
-				<img src="../pics/logo1.png" alt="logo" style="border-radius: 15px">
-				<button class="btn-default">
-				My App
-				</button>
-			</a>
-			<div align="right">
-				<a href="../logout.php">
-					<button class="btn btn-default btn-lg" id="btn-logout">Logout</button>
-				</a>
-			</div>
-		</header>
-	</head>
 	<!-- Data Insert -->
 	<?php
 	//Insert Data
@@ -56,7 +38,7 @@ $username1 = $_SESSION['username'];
 		<button class="btn-lg btn-info" id="btn-insert">Add User</button>
 		</center>
 		<form name='insert' method='post' id="form-insert">
-			<table border="1" width="500" cellspacing="0" cellpadding="10" align="center" id="table-insert">
+			<table border="1" width="500" cellspacing="0" cellpadding="10" align="center" id="table-insert" class="table">
 				<!-- FirstName-->
 				<tr align="center">
 					<td  height="50">
@@ -141,7 +123,7 @@ $username1 = $_SESSION['username'];
 			}
 			echo $page;
 			?>
-			<table border='5' align="center" width="80%" id="table-display">
+			<table border='5' align="center" width="80%" id="table-display" class="table">
 				<tr>
 					<td><input type='checkbox' id='selectall'></td>
 					<td colspan='7'>
@@ -224,5 +206,4 @@ $username1 = $_SESSION['username'];
 		?>
 		<a href='manage_user.php?page=<?php echo $total_pages ?>' style="color: red;font-size: large;"> >|</a>
 		</center>
-	</body>
-</html>
+<?php $con->get_admin_footer(); ?>

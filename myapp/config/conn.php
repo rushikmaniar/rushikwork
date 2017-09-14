@@ -1,8 +1,6 @@
 <!-- connection to database -->
 <?php
 //echo "included config";
-$path = str_ireplace(array('config'),'',dirname(__FILE__));
-define('BASE_PATH',$path);
 class connection{
 	public $db_hostname='localhost';
 	public $db_username='root';

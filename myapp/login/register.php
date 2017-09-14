@@ -37,6 +37,7 @@ $r = $con->insert($fname,$lname,$uname,$pas);
 <div class="container">
 	<section id="content">
 		<form action="" method="post">
+		<h1>MY APP</h1><img src="../images/logo/logo1.png" alt="logo">
 			<h1>SignUp Form</h1>
 			<div>
 				<input type="text" placeholder="firstname" required="" id="firstname" name="username" />

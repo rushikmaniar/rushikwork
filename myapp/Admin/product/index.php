@@ -1,6 +1,6 @@
 <!-- Connection of Database-->
 <?php
-require_once("admin_includes/admin_header.php");
+require_once("../admin_includes/admin_header.php");
 $con = new connection();
 ?>
 	<?php
@@ -124,7 +124,7 @@ $con = new connection();
 		<button class="btn-lg btn-info" id="btn-insert">Insert Data</button>
 		</center>
 		<form name='insert' method='post' id="form-insert" enctype="multipart/form-data">
-			<table border="1" width="500" cellspacing="0" cellpadding="10" align="center" id="table-insert">
+			<table border="1" width="500" cellspacing="0" cellpadding="10" align="center" id="table-insert" class="table">
 				<tr align="center">
 					<td  height="50">
 						<label>Product Name</label>
@@ -198,7 +198,7 @@ $con = new connection();
 			$sth = $con->dbh->query($display_query);
 			//echo $page;
 			?>
-			<table border='1' width="500" cellpadding="10" cellspacing="0" align="center" id="table_display">
+			<table border='1' width="500" cellpadding="10" cellspacing="0" align="center" id="table_display" class="table">
 				<tr>
 					<td><input type='checkbox' id='selectall'></td>
 					<td colspan='4'>
