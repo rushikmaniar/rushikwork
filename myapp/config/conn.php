@@ -1,13 +1,20 @@
 <!-- connection to database -->
 <?php
 //echo "included config";
+$path = str_ireplace(array('config'),'',dirname(__FILE__));
+define('BASE_PATH',$path);
 class connection{
 	public $db_hostname='localhost';
 	public $db_username='root';
 	public $db_password='';
 	public $start_time;
 	public $dbh;
-	
+	//public $base_url = $path;
+	//echo "\n".$path;
+	//$base_url = $path;
+	//define('BASE_URL',$path);
+	//require_once(BASE_URL.'/config/conn.php');
+
 	//mysql connection constructor
 	public function __construct()
 	{
@@ -45,10 +52,12 @@ class connection{
 				}
 				if($res['user_type'] == 'Admin'){
 					$_SESSION['Admin'] = "Admin";
-					header("Location:admin/");
+					$location = "location:../admin";
+					header($location);
 				}
 				else{
-					header("location:user/");
+					$location = "location:../user";
+					header($location);
 				}
 			}
 			else

@@ -4,5 +4,5 @@ unset($_SESSION['Admin']);
 unset($_SESSION['username']);
 setcookie("name","");
 setcookie("password","");
-header("location:index.php");
+header("location:login/index.php");
 ?>

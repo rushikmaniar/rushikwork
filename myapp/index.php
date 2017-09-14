@@ -1,4 +1,6 @@
-<?php session_start(); 
+<?php 
+header("location:login/index.php");
+session_start(); 
 require_once('includes/header.php');
 $con = new connection();
 ?>
