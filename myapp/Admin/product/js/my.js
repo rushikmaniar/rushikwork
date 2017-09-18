@@ -40,6 +40,7 @@ $("#string").on("input", function() {
     });
 });
 $(".switch").on("click", function() {
+    //alert("called");
     var productId = $(this).attr("data-id");
     var status = $(this).attr("data-status");
     var updateSattus = 0;

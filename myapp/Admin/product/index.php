@@ -34,7 +34,7 @@ $con = new connection();
 					//	$myfolder = $_POST['name'];
 					//$myNewFolderPath = "UploadFolder/images/" . $myfolder;
 					
-					$UploadFolder = "UploadFolder/images";
+					$UploadFolder = BASE_PATH."/uploads/images";
 					
 					
 					$counter = 0;
@@ -174,10 +174,11 @@ $con = new connection();
 						</center>
 					</td>
 				</tr>
+				
 			</table>
 		</form>
 		<center>
-		<input type="text"  id="string" placeholder="Search" />
+		<input type="text"  id="string" placeholder="Search" class="input-lg" />
 		</center>
 		<!--<h1>Display data of bca student table </h1> -->
 		<center>
@@ -273,7 +274,7 @@ $con = new connection();
 				?>
 				<tr><td colspan="5" height="70"><center><input type="submit" name="delete" value="Delete" class="btn-danger btn-lg" />
 				<script src="js/jquery-3.2.1.min.js"></script>
-				<script src="../../js/my.js"></script>
+				<script src="../assets/js/my.js"></script>
 				<script src="js/my.js"></script>
 				</center>
 			</td>
@@ -298,7 +299,7 @@ $con = new connection();
 			$sql = "select * from images where product_id=$value";
 			$sth = $con->dbh->query($sql);
 			
-			$dir = "UploadFolder/images/";
+			$dir = "../../uploads/images/";
 			while($res = $sth->fetch()){
 				$filename= $dir.$res['img_name'];
 				
@@ -320,7 +321,7 @@ $con = new connection();
 		}
 	}
 ?>
-<h3 align="center">Pages</h3>
+<h3 align="center" style="color: yellow;font-weight: bold;">Pages</h3>
 <br>
 <center>
 <?php
@@ -330,11 +331,11 @@ $result = $con->dbh->query("SELECT FOUND_ROWS()");
 $total_records = $result->fetchColumn();
 $total_pages = ceil($total_records / $num_rec_per_page);
 ?>
-<a href='index.php?page=1' id='page' style="color: red;font-size: large;">|<</a>
+<a href='index.php?page=1' id='page' style="color: yellow;font-size: large;">|<</a>
 <?php
 for ($i=1; $i<=$total_pages; $i++) {
 ?>
-<a href='index.php?page=<?php echo $i ?>' style="color: black;font-size: large;" id="<?php echo 'link'.$i; ?>" ><?php echo $i; ?></a>
+<a href='index.php?page=<?php echo $i ?>' style="color: white;font-size: large;" id="<?php echo 'link'.$i; ?>" ><?php echo $i; ?></a>
 <?php
 };
 if(isset($page))
@@ -346,7 +347,5 @@ $(pageId).addClass('selectedPage');
 </script>";
 }
 ?>
-<a href='index.php?page=<?php echo $total_pages ?>' style="color: red;font-size: large;"> >|</a>
+<a href='index.php?page=<?php echo $total_pages ?>' style="color: yellow;font-size: large;"> >|</a>
 </center>
-</body>
-</html>

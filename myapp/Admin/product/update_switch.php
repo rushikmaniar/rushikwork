@@ -8,7 +8,7 @@
      $("#resultarea").text(data);
   }
 });*/
-require_once("../../conn.php");
+require_once('../../config/conn.php');
 $con = new connection();
 $id = $_REQUEST['rowid'];
 $status = $_REQUEST['status'];

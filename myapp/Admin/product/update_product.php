@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>My App</title>
-</head>
-<link rel="stylesheet" type="text/css" href="../../css/my.css">
-<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
-<body style="background-color: yellow;">
-<?php  
+<?php 
+require_once("../admin_includes/admin_header.php");
 $id = $_GET['id'];
-require_once("../../conn.php");
+//require_once("../../conn.php");
 $con = new connection();
 
 //data from product(name,price)
@@ -45,7 +38,7 @@ if(isset($_POST['update'])  && $_POST['update']=="Update"){
 			//	$myfolder = $_POST['name'];
 				//$myNewFolderPath = "UploadFolder/images/" . $myfolder;
 				
-				$UploadFolder = "UploadFolder/images";
+				$UploadFolder = BASE_PATH."/uploads/images";
 				
 				
 				$counter = 0;
@@ -137,7 +130,7 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 			$sql = "select * from images where img_id=$value";
 			$q1 = $con->dbh->query($sql);
 			
-			$dir = "UploadFolder/images/";
+			$dir = BASE_PATH."/uploads/images/";
 
 			while($res = $q1->fetch(PDO::FETCH_BOTH)){
 				$filename= $dir.$res['img_name'];
@@ -170,16 +163,16 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 ?>
 <h1 class="h1">Update Product</h1>
 <form name="form_update" id="form_update" method="post" enctype="multipart/form-data" >
-<table class=" table table-condensed" border="5" cellpadding="5" cellspacing="5" style="background-color: white;">
+<table class=" table table-condensed" border="5" cellpadding="5" cellspacing="5" style="">
 <th>Feilds</th>
 <th>values</th>
 	<tr>
 	<td>Product Name</td>
-	<td><input type="text" name="name" value="<?php echo $rec['name'] ?>"></td>
+	<td><input type="text" style="color:black;font-weight: bold;" name="name" value="<?php echo $rec['name'] ?>"></td>
 	</tr>
 	<tr>
 	<td>Product Price</td>
-	<td><input type="text" name="price" value="<?php echo $rec['price'] ?>"></td>
+	<td><input type="text" style="color:black;font-weight: bold;" name="price" value="<?php echo $rec['price'] ?>"></td>
 	</tr>
 	
 
@@ -232,17 +225,17 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 		<br>
 
 <label>Add Product Images</label>
-<input type="file" name="files[]" multiple="multiple" />
+<input type="file" name="files[]" multiple="multiple" class="btn-default btn-lg" />
 
 <label>Delete Product Images</label>
-<input type="submit" name="delete" value="Delete" onclick="my()">
+<input type="submit" name="delete" class="btn-lg btn-danger" value="Delete" onclick="my()">
 
 		</td>
 		
 		<?php
 		//$imgid = $res['img_id'];
 					//$i = $res['img_id'];
-			$dir = "UploadFolder/images/";
+			$dir = BASE_URL."/uploads/images/";
 			echo "<td class = 'img_checkbox'>";
 			echo "<input type='checkbox' id='img_selectall'>";
 			echo "<label>Select ALL </label>";
@@ -254,8 +247,8 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 				?>
 				 <img src="<?php echo $dir.$res['img_name'] ?>" alt="not found">
 				<?php 
-					echo "<input type = 'checkbox' class='img_check' name='img_del[]' value='"
-					.$res['img_id']."'>";
+					echo "<input type = 'checkbox' class='img_check ' name='img_del[]' value='"
+					.$res['img_id']."'";
  				?>
 				<?php
 			}	
@@ -266,17 +259,14 @@ if(isset($_POST['delete']) && $_POST['delete']=="Delete"){
 		</td>
 	</tr>
 	<tr>
-	<td colspan="2"><center><input type="submit" name="update" value="Update" onclick="my()"></center></td>
+	<td colspan="2"><center><input type="submit" class="btn-lg btn-primary" name="update" value="Update" onclick="my()"></center></td>
 	
 	</tr>
 </table>
 
 </form>
 <center><a href="index.php">Go Back TO Product List</a></center>
-</body>
-</html>
 <script src="js/jquery-3.2.1.min.js"></script>
-<script src="../../js/my.js"></script>
 <script src="js/my.js"></script>
 <script>
 	function my(){

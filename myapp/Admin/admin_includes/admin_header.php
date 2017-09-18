@@ -32,7 +32,7 @@ require_once(BASE_PATH.'config/conn.php');
       <li class="active"><a href="<?php echo BASE_URL; ?>admin/index.php">Home</a></li>
       <li><a href="<?php echo BASE_URL; ?>admin/product/index.php">Manage Products</a></li>
       <li><a href="<?php echo BASE_URL; ?>admin/manage_user.php">Manage User</a></li>
-      <li><a href="../logout.php">Logout</a></li>
+      <li><a href="../../logout.php">Logout</a></li>
     </ul>
   </div>
   <div id="splash"><img src="<?php echo BASE_URL; ?>admin/assets/images/img01.jpg" width="940" height="410" alt="" /></div>
